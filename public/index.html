@@ -4,28 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>X1Ninja Mon — New launches</title>
-  <meta name="theme-color" content="#000000" />
-  <link rel="icon" href="https://x1.ninja/logo.png" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#0A0A0F" />
+  <link rel="icon" href="/brand/assets/logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/brand/tokens.css" />
   <style>
-    :root {
-      --bg-primary: #000;
-      --bg-secondary: #0b0f14;
-      --bg-tertiary: #121821;
-      --bg-hover: #1a2332;
-      --border-subtle: #1c2430;
-      --border-bright: #263244;
-      --text-primary: #fff;
-      --text-secondary: #9aa4b2;
-      --x1-blue: #00b8ff;
-      --buy-green: #00ff9c;
-      --sell-red: #f35;
-      --font-sans: "Inter", sans-serif;
-      --font-mono: "JetBrains Mono", monospace;
-    }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { min-height: 100%; background: var(--bg-primary); color: var(--text-primary); font-family: var(--font-sans); }
     body { display: flex; flex-direction: column; }
@@ -60,7 +46,7 @@
       box-shadow: 0 0 8px var(--buy-green);
     }
     .dot.err { background: var(--sell-red); box-shadow: 0 0 8px var(--sell-red); }
-    .dot.wait { background: #f5c542; box-shadow: 0 0 8px #f5c542; }
+    .dot.wait { background: var(--warn-yellow); box-shadow: 0 0 8px var(--warn-yellow); }
 
     .bar {
       padding: 14px 20px 8px;
@@ -78,7 +64,7 @@
     table { width: 100%; border-collapse: collapse; font-size: 13px; }
     th {
       text-align: left;
-      color: var(--text-secondary);
+      color: var(--text-muted);
       font-weight: 500;
       font-size: 11px;
       text-transform: uppercase;
@@ -125,7 +111,7 @@
       border-radius: 4px;
     }
     .s-a { color: var(--buy-green); background: color-mix(in srgb, var(--buy-green) 12%, transparent); }
-    .s-b { color: #f5c542; background: color-mix(in srgb, #f5c542 12%, transparent); }
+    .s-b { color: var(--warn-yellow); background: color-mix(in srgb, var(--warn-yellow) 12%, transparent); }
     .s-c { color: var(--sell-red); background: color-mix(in srgb, var(--sell-red) 12%, transparent); }
     .empty, .error {
       padding: 48px 20px;
@@ -137,7 +123,7 @@
 </head>
 <body>
   <header>
-    <img src="https://x1.ninja/logo.png" alt="X1.Ninja" />
+    <img src="/brand/assets/logo.png" alt="X1.Ninja" />
     <h1>X1<span>Ninja</span> Mon</h1>
     <div class="meta">
       <span id="status"><span class="dot wait"></span></span>
@@ -204,7 +190,7 @@
     const safetyClass = (score) => score >= 80 ? "s-a" : score >= 50 ? "s-b" : "s-c";
 
     const tokenImg = (url) => {
-      if (!url) return "https://x1.ninja/logo.png";
+      if (!url) return "/brand/assets/logo.png";
       if (url.startsWith("http") || url.startsWith("data:")) return url;
       return "https://x1.ninja" + (url.startsWith("/") ? url : "/" + url);
     };
@@ -242,7 +228,7 @@
           return `<tr class="${isNew ? "fresh" : ""}">
             <td>
               <div class="token">
-                <img src="${tokenImg(p.baseToken?.logoUrl)}" alt="" onerror="this.src='https://x1.ninja/logo.png'" />
+                <img src="${tokenImg(p.baseToken?.logoUrl)}" alt="" onerror="this.src='/brand/assets/logo.png'" />
                 <div>
                   <div class="name">${escapeHtml(p.baseToken?.symbol || "?")}${isNew ? '<span class="badge">NEW</span>' : ""}</div>
                   <div class="pair"><a href="${href}" target="_blank" rel="noreferrer">${escapeHtml(p.baseToken?.symbol || "")}/${escapeHtml(p.quoteToken?.symbol || "")}</a></div>

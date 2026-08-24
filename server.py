@@ -15,6 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 PUBLIC = ROOT / "public"
+BRAND = ROOT / "brand"
 API_BASE = "https://api.x1.ninja"
 PAGE_SIZE = 500
 CACHE_SECONDS = 20
@@ -99,12 +100,36 @@ class Handler(SimpleHTTPRequestHandler):
         print(f"[{self.log_date_time_string()}] {fmt % args}")
 
     def do_GET(self) -> None:
-        if self.path.split("?", 1)[0] == "/api/launches":
+        path = urllib.parse.urlparse(self.path).path
+        if path == "/api/launches":
             self.handle_launches()
             return
-        if self.path in ("/", "/index.html"):
+        if path.startswith("/brand/"):
+            self.serve_brand(path)
+            return
+        if path in ("/", "/index.html"):
             self.path = "/index.html"
         super().do_GET()
+
+    def serve_brand(self, url_path: str) -> None:
+        rel = url_path[len("/brand/") :]
+        if not rel or ".." in Path(rel).parts:
+            self.send_error(404)
+            return
+        target = (BRAND / rel).resolve()
+        brand_root = BRAND.resolve()
+        if target != brand_root and brand_root not in target.parents:
+            self.send_error(404)
+            return
+        if not target.is_file():
+            self.send_error(404)
+            return
+        data = target.read_bytes()
+        self.send_response(200)
+        self.send_header("Content-Type", self.guess_type(str(target)))
+        self.send_header("Content-Length", str(len(data)))
+        self.end_headers()
+        self.wfile.write(data)
 
     def handle_launches(self) -> None:
         try:

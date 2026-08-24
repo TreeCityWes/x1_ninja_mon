@@ -1,0 +1,47 @@
+/* X1.Ninja color tokens
+ * Source of truth extracted from https://x1.ninja (Aug 2026)
+ * Product UI is dark-only. Do not introduce a light theme from these values.
+ */
+
+:root {
+  /* --- Identity (logo / wordmark) --- */
+  --ninja-void: #000000;
+  --ninja-navy: #003a93;
+  --ninja-blue: #0060ae;
+  --ninja-mid: #0078c0;
+  --ninja-steel: #243030;
+  --ninja-gold: #c9a227;
+
+  --ninja-x-gradient: linear-gradient(135deg, #003a93 0%, #0060ae 52%, #0078c0 100%);
+
+  /* --- Product surfaces --- */
+  --bg-primary: #000000;
+  --bg-chrome: #0a0a0f;
+  --bg-secondary: #0b0f14;
+  --bg-tertiary: #121821;
+  --bg-hover: #1a2332;
+  --border-subtle: #1c2430;
+  --border-bright: #263244;
+
+  /* --- Text --- */
+  --text-primary: #ffffff;
+  --text-secondary: #9aa4b2;
+  --text-muted: #768291;
+
+  /* --- Interface accent --- */
+  --x1-blue: #00b8ff;
+  --x1-blue-15: color-mix(in oklab, var(--x1-blue) 15%, transparent);
+  --x1-blue-20: color-mix(in oklab, var(--x1-blue) 20%, transparent);
+  --x1-blue-25: color-mix(in oklab, var(--x1-blue) 25%, transparent);
+
+  /* --- Market / status --- */
+  --buy-green: #00ff9c;
+  --sell-red: #ff3355;
+  --warn-yellow: #ffd166;
+
+  /* --- Type --- */
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  color-scheme: dark;
+}

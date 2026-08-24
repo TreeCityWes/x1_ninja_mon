@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>X1Ninja Mon — New launches</title>
+  <meta name="theme-color" content="#000000" />
+  <link rel="icon" href="https://x1.ninja/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-primary: #000;
+      --bg-secondary: #0b0f14;
+      --bg-tertiary: #121821;
+      --bg-hover: #1a2332;
+      --border-subtle: #1c2430;
+      --border-bright: #263244;
+      --text-primary: #fff;
+      --text-secondary: #9aa4b2;
+      --x1-blue: #00b8ff;
+      --buy-green: #00ff9c;
+      --sell-red: #f35;
+      --font-sans: "Inter", sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100%; background: var(--bg-primary); color: var(--text-primary); font-family: var(--font-sans); }
+    body { display: flex; flex-direction: column; }
+
+    header {
+      height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 20px;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    header img { width: 32px; height: 32px; border-radius: 8px; }
+    header h1 { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+    header h1 span { color: var(--x1-blue); }
+    .meta {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-family: var(--font-mono);
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--buy-green);
+      box-shadow: 0 0 8px var(--buy-green);
+    }
+    .dot.err { background: var(--sell-red); box-shadow: 0 0 8px var(--sell-red); }
+    .dot.wait { background: #f5c542; box-shadow: 0 0 8px #f5c542; }
+
+    .bar {
+      padding: 14px 20px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .bar h2 { font-size: 13px; font-weight: 500; color: var(--text-secondary); }
+    .bar h2 strong { color: var(--text-primary); font-weight: 600; }
+    a { color: var(--x1-blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap { overflow: auto; padding: 0 12px 32px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th {
+      text-align: left;
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 10px 10px;
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      background: var(--bg-primary);
+    }
+    th.num, td.num { text-align: right; font-family: var(--font-mono); }
+    tr { border-bottom: 1px solid var(--border-subtle); }
+    tr:hover td { background: var(--bg-hover); }
+    tr.fresh td { background: color-mix(in srgb, var(--buy-green) 8%, transparent); }
+    td { padding: 12px 10px; vertical-align: middle; }
+    .token { display: flex; align-items: center; gap: 10px; min-width: 180px; }
+    .token img {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--bg-tertiary); object-fit: cover;
+    }
+    .token .name { font-weight: 600; line-height: 1.2; }
+    .token .pair { color: var(--text-secondary); font-size: 11px; font-family: var(--font-mono); }
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: color-mix(in srgb, var(--buy-green) 18%, transparent);
+      color: var(--buy-green);
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .chg.up { color: var(--buy-green); }
+    .chg.down { color: var(--sell-red); }
+    .safety {
+      display: inline-block;
+      min-width: 36px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .s-a { color: var(--buy-green); background: color-mix(in srgb, var(--buy-green) 12%, transparent); }
+    .s-b { color: #f5c542; background: color-mix(in srgb, #f5c542 12%, transparent); }
+    .s-c { color: var(--sell-red); background: color-mix(in srgb, var(--sell-red) 12%, transparent); }
+    .empty, .error {
+      padding: 48px 20px;
+      text-align: center;
+      color: var(--text-secondary);
+    }
+    .error { color: var(--sell-red); }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://x1.ninja/logo.png" alt="X1.Ninja" />
+    <h1>X1<span>Ninja</span> Mon</h1>
+    <div class="meta">
+      <span id="status"><span class="dot wait"></span></span>
+      <span>XNT <span id="xnt">—</span></span>
+      <span id="updated">polling…</span>
+    </div>
+  </header>
+  <div class="bar">
+    <h2><strong>New launches</strong> on X1 · newest XDEX pools from <a href="https://x1.ninja" target="_blank" rel="noreferrer">x1.ninja</a></h2>
+    <h2 id="count"></h2>
+  </div>
+  <div class="wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th class="num">Age</th>
+          <th class="num">Price</th>
+          <th class="num">24H</th>
+          <th class="num">Liq</th>
+          <th class="num">MCap</th>
+          <th class="num">Holders</th>
+          <th class="num">Safety</th>
+        </tr>
+      </thead>
+      <tbody id="rows">
+        <tr><td colspan="8" class="empty">Loading launches…</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    const seen = new Set();
+    let primed = false;
+
+    const fmtUsd = (n) => {
+      if (n == null || Number.isNaN(n)) return "—";
+      const abs = Math.abs(n);
+      if (abs >= 1e6) return "$" + (n / 1e6).toFixed(2) + "M";
+      if (abs >= 1e3) return "$" + (n / 1e3).toFixed(2) + "K";
+      if (abs >= 1) return "$" + n.toFixed(2);
+      if (abs >= 0.01) return "$" + n.toFixed(4);
+      if (abs === 0) return "$0.00";
+      return "$" + n.toPrecision(3);
+    };
+
+    const fmtAge = (iso) => {
+      const ms = Date.now() - new Date(iso).getTime();
+      const m = Math.max(0, Math.floor(ms / 60000));
+      if (m < 60) return m + "m";
+      const h = Math.floor(m / 60);
+      if (h < 48) return h + "h";
+      const d = Math.floor(h / 24);
+      if (d < 14) return d + "d";
+      if (d < 60) return Math.floor(d / 7) + "w";
+      return Math.floor(d / 30) + "mo";
+    };
+
+    const fmtPct = (n) => {
+      if (n == null) return "—";
+      const sign = n > 0 ? "+" : "";
+      return sign + n.toFixed(2) + "%";
+    };
+
+    const safetyClass = (score) => score >= 80 ? "s-a" : score >= 50 ? "s-b" : "s-c";
+
+    const tokenImg = (url) => {
+      if (!url) return "https://x1.ninja/logo.png";
+      if (url.startsWith("http") || url.startsWith("data:")) return url;
+      return "https://x1.ninja" + (url.startsWith("/") ? url : "/" + url);
+    };
+
+    const setStatus = (kind) => {
+      const el = document.getElementById("status");
+      el.innerHTML = `<span class="dot ${kind === "ok" ? "" : kind === "err" ? "err" : "wait"}"></span>`;
+    };
+
+    async function refresh() {
+      try {
+        const res = await fetch("/api/launches", { cache: "no-store" });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || res.statusText);
+
+        document.getElementById("xnt").textContent = fmtUsd(data.xntPriceUsd);
+        document.getElementById("updated").textContent =
+          "refreshed " + new Date().toLocaleTimeString();
+        document.getElementById("count").textContent =
+          (data.totalPools || 0).toLocaleString() + " pools indexed";
+        setStatus("ok");
+
+        const launches = data.launches || [];
+        const tbody = document.getElementById("rows");
+        if (!launches.length) {
+          tbody.innerHTML = `<tr><td colspan="8" class="empty">No launches returned.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = launches.map((p) => {
+          const isNew = primed && !seen.has(p.address);
+          const chg = p.priceChange24h;
+          const chgClass = chg > 0 ? "up" : chg < 0 ? "down" : "";
+          const href = "https://x1.ninja/pair/" + encodeURIComponent(p.address);
+          return `<tr class="${isNew ? "fresh" : ""}">
+            <td>
+              <div class="token">
+                <img src="${tokenImg(p.baseToken?.logoUrl)}" alt="" onerror="this.src='https://x1.ninja/logo.png'" />
+                <div>
+                  <div class="name">${escapeHtml(p.baseToken?.symbol || "?")}${isNew ? '<span class="badge">NEW</span>' : ""}</div>
+                  <div class="pair"><a href="${href}" target="_blank" rel="noreferrer">${escapeHtml(p.baseToken?.symbol || "")}/${escapeHtml(p.quoteToken?.symbol || "")}</a></div>
+                </div>
+              </div>
+            </td>
+            <td class="num">${fmtAge(p.createdAt)}</td>
+            <td class="num">${fmtUsd(p.priceUsd)}</td>
+            <td class="num chg ${chgClass}">${fmtPct(chg)}</td>
+            <td class="num">${fmtUsd(p.liquidity)}</td>
+            <td class="num">${fmtUsd(p.marketCap)}</td>
+            <td class="num">${(p.holders ?? 0).toLocaleString()}</td>
+            <td class="num"><span class="safety ${safetyClass(p.safetyScore ?? 0)}">${p.safetyScore ?? "—"}</span></td>
+          </tr>`;
+        }).join("");
+
+        launches.forEach((p) => seen.add(p.address));
+        primed = true;
+      } catch (err) {
+        setStatus("err");
+        document.getElementById("updated").textContent = "error";
+        document.getElementById("rows").innerHTML =
+          `<tr><td colspan="8" class="error">${escapeHtml(err.message)}</td></tr>`;
+      }
+    }
+
+    function escapeHtml(s) {
+      return String(s)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    refresh();
+    setInterval(refresh, 20000);
+  </script>
+</body>
+</html>

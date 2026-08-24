@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#0A0A0F" />
+  <title>X1.Ninja Color Guidelines</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="tokens.css" />
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--bg-primary); color: var(--text-primary); font-family: var(--font-sans); }
+    body { min-height: 100vh; }
+    a { color: var(--x1-blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 32px 20px 80px; }
+    header.hero {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 28px;
+      align-items: center;
+      padding: 28px;
+      background: linear-gradient(180deg, color-mix(in oklab, var(--bg-tertiary) 60%, transparent), transparent);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      margin-bottom: 40px;
+    }
+    header.hero img { width: 160px; height: 160px; border-radius: 12px; background: #000; }
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--x1-blue);
+      margin: 0 0 8px;
+    }
+    h1 { font-size: 36px; letter-spacing: -0.03em; margin: 0 0 8px; }
+    h1 span { color: var(--x1-blue); }
+    .lede { color: var(--text-secondary); font-size: 15px; line-height: 1.6; max-width: 62ch; margin: 0; }
+    nav.toc {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin: 20px 0 0;
+    }
+    nav.toc a {
+      font-size: 12px;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-secondary);
+      padding: 6px 10px;
+      border-radius: 999px;
+      text-decoration: none;
+    }
+    nav.toc a:hover { border-color: var(--x1-blue); color: var(--x1-blue); }
+    h2 {
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 48px 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    h3 { font-size: 16px; margin: 22px 0 8px; }
+    p, li { color: var(--text-secondary); font-size: 14.5px; line-height: 1.65; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+    .swatch {
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-secondary);
+    }
+    .chip { height: 88px; }
+    .meta { padding: 10px 12px 12px; }
+    .meta strong { display: block; font-size: 13px; }
+    .meta code {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th, td {
+      text-align: left;
+      padding: 9px 10px;
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: top;
+    }
+    th { color: var(--text-muted); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; }
+    td.mono, .mono { font-family: var(--font-mono); font-size: 12px; color: var(--text-primary); }
+    .dot { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 8px; vertical-align: -1px; border: 1px solid var(--border-bright); }
+    .pass { color: var(--buy-green); }
+    .fail { color: var(--sell-red); }
+    .warn { color: var(--warn-yellow); }
+    .demo-bar {
+      display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+      padding: 12px; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 10px;
+    }
+    .chip-btn {
+      font-size: 12px; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--border-subtle);
+      background: var(--bg-secondary); color: var(--text-secondary);
+    }
+    .chip-btn.active {
+      background: color-mix(in oklab, var(--x1-blue) 20%, transparent);
+      border-color: var(--x1-blue);
+      color: var(--x1-blue);
+    }
+    .btn-primary {
+      background: var(--x1-blue); color: #000; border: 0; font-weight: 600;
+      padding: 8px 14px; border-radius: 8px; font-size: 13px;
+    }
+    .row {
+      display: flex; justify-content: space-between; padding: 8px 10px;
+      border-bottom: 1px solid var(--border-subtle); font-size: 13px; font-family: var(--font-mono);
+    }
+    .up { color: var(--buy-green); }
+    .down { color: var(--sell-red); }
+    .do, .dont {
+      border-radius: 12px; padding: 16px 18px; border: 1px solid var(--border-subtle);
+    }
+    .do { background: color-mix(in oklab, var(--buy-green) 6%, var(--bg-secondary)); }
+    .dont { background: color-mix(in oklab, var(--sell-red) 7%, var(--bg-secondary)); }
+    .do h3 { color: var(--buy-green); margin-top: 0; }
+    .dont h3 { color: var(--sell-red); margin-top: 0; }
+    .grad {
+      height: 88px;
+      background: linear-gradient(90deg, #003A93 0%, #0060AE 50%, #0078C0 100%);
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+    }
+    pre {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 14px 16px;
+      overflow: auto;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-primary);
+      line-height: 1.55;
+    }
+    footer { margin-top: 56px; color: var(--text-muted); font-size: 12px; }
+    @media (max-width: 720px) {
+      header.hero, .split { grid-template-columns: 1fr; }
+      header.hero img { width: 120px; height: 120px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <img src="assets/logo.png" alt="X1.Ninja logo" />
+      <div>
+        <p class="eyebrow">Brand system · Color</p>
+        <h1>X1.<span>Ninja</span></h1>
+        <p class="lede">
+          Dark-only DEX analytics. Void black, cool steel, one electric cyan.
+          Navy belongs to the ninja. Cyan belongs to the interface.
+        </p>
+        <nav class="toc">
+          <a href="#principle">Principle</a>
+          <a href="#surfaces">Surfaces</a>
+          <a href="#type">Type</a>
+          <a href="#accent">Accent</a>
+          <a href="#logo">Logo</a>
+          <a href="#data">Market data</a>
+          <a href="#a11y">Contrast</a>
+          <a href="#rules">Rules</a>
+          <a href="#tokens">Tokens</a>
+        </nav>
+      </div>
+    </header>
+
+    <h2 id="principle">Principle</h2>
+    <div class="split">
+      <div class="card">
+        <h3>Interface cyan</h3>
+        <p><code class="mono">#00B8FF</code> is the only interactive brand color on the site. Selected filters, search focus, Submit Token, and active nav all use it — often as a 15–25% wash with a solid cyan border.</p>
+      </div>
+      <div class="card">
+        <h3>Identity navy</h3>
+        <p>The mark is a deeper X1 blue: <code class="mono">#003A93 → #0078C0</code>. That gradient is for the X, the headband, and the “X1” letters. It is not a text or link color.</p>
+      </div>
+    </div>
+
+    <h2 id="surfaces">Surfaces</h2>
+    <div class="swatches">
+      <div class="swatch"><div class="chip" style="background:#000000"></div><div class="meta"><strong>Void</strong><code>#000000 · bg-primary</code></div></div>
+      <div class="swatch"><div class="chip" style="background:#0A0A0F"></div><div class="meta"><strong>Chrome</strong><code>#0A0A0F · theme-color</code></div></div>
+      <div class="swatch"><div class="chip" style="background:#0B0F14"></div><div class="meta"><strong>Secondary</strong><code>#0B0F14 · sidebar / bars</code></div></div>
+      <div class="swatch"><div class="chip" style="background:#121821"></div><div class="meta"><strong>Tertiary</strong><code>#121821 · nested wells</code></div></div>
+      <div class="swatch"><div class="chip" style="background:#1A2332"></div><div class="meta"><strong>Hover</strong><code>#1A2332 · rows</code></div></div>
+      <div class="swatch"><div class="chip" style="background:#1C2430"></div><div class="meta"><strong>Border</strong><code>#1C2430 · default rule</code></div></div>
+      <div class="swatch"><div class="chip" style="background:#263244"></div><div class="meta"><strong>Border bright</strong><code>#263244 · emphasis</code></div></div>
+    </div>
+    <p>Hue sits between 213 and 218. Surfaces stay cool-blue-black. No warm gray, no purple-black, no light theme.</p>
+
+    <h2 id="type">Type color</h2>
+    <div class="swatches">
+      <div class="swatch"><div class="chip" style="background:#FFFFFF"></div><div class="meta"><strong>Primary</strong><code>#FFFFFF · 21:1 AAA</code></div></div>
+      <div class="swatch"><div class="chip" style="background:#9AA4B2"></div><div class="meta"><strong>Secondary</strong><code>#9AA4B2 · 8.33:1 AAA</code></div></div>
+      <div class="swatch"><div class="chip" style="background:#768291"></div><div class="meta"><strong>Muted</strong><code>#768291 · 5.37:1 AA</code></div></div>
+    </div>
+    <p>Inter for UI. JetBrains Mono for prices, hashes, and token tickers.</p>
+
+    <h2 id="accent">Accent</h2>
+    <div class="swatches">
+      <div class="swatch"><div class="chip" style="background:#00B8FF"></div><div class="meta"><strong>X1 Cyan</strong><code>#00B8FF · rgb(0, 184, 255)</code></div></div>
+    </div>
+    <h3>How it appears in product</h3>
+    <div class="demo-bar">
+      <span class="chip-btn">Age</span>
+      <span class="chip-btn active">Liquidity</span>
+      <span class="chip-btn">Volume</span>
+      <span class="chip-btn">Filters</span>
+      <button class="btn-primary">Submit Token</button>
+    </div>
+    <p>Selected chip: cyan at 20% fill, cyan border, cyan label. Primary button: solid cyan, black label — not white.</p>
+
+    <h2 id="logo">Logo colors</h2>
+    <div class="grad" role="img" aria-label="Ninja X gradient from navy to mid blue"></div>
+    <div class="swatches" style="margin-top:12px">
+      <div class="swatch"><div class="chip" style="background:#003A93"></div><div class="meta"><strong>Navy</strong><code>#003A93 · X dark / headband</code></div></div>
+      <div class="swatch"><div class="chip" style="background:#0060AE"></div><div class="meta"><strong>Blue</strong><code>#0060AE · X mid / “X1”</code></div></div>
+      <div class="swatch"><div class="chip" style="background:#0078C0"></div><div class="meta"><strong>Mid</strong><code>#0078C0 · X light stop</code></div></div>
+      <div class="swatch"><div class="chip" style="background:#243030"></div><div class="meta"><strong>Steel</strong><code>#243030 · hood</code></div></div>
+      <div class="swatch"><div class="chip" style="background:#C9A227"></div><div class="meta"><strong>Gold</strong><code>#C9A227 · tsuba only</code></div></div>
+    </div>
+    <p>Gold is jewelry, not a UI accent. The site’s warning yellow is <code class="mono">#FFD166</code> — related temperature, different job.</p>
+
+    <h2 id="data">Market data</h2>
+    <div class="swatches">
+      <div class="swatch"><div class="chip" style="background:#00FF9C"></div><div class="meta"><strong>Buy / up</strong><code>#00FF9C</code></div></div>
+      <div class="swatch"><div class="chip" style="background:#FF3355"></div><div class="meta"><strong>Sell / down</strong><code>#FF3355</code></div></div>
+      <div class="swatch"><div class="chip" style="background:#FFD166"></div><div class="meta"><strong>Warning</strong><code>#FFD166</code></div></div>
+    </div>
+    <div class="card" style="margin-top:12px; padding: 0;">
+      <div class="row"><span>ANL / XNT</span><span class="down">−10.47%</span></div>
+      <div class="row"><span>BRAINS / XNT</span><span class="up">+4.42%</span></div>
+      <div class="row"><span>XNT / USDC</span><span class="down">−4.64%</span></div>
+    </div>
+    <p>Green and red are directional. They are not brand colors and should not paint chrome, buttons, or illustrations.</p>
+
+    <h2 id="a11y">Contrast on void</h2>
+    <table>
+      <thead>
+        <tr><th>Foreground</th><th>Background</th><th>Ratio</th><th>WCAG</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="dot" style="background:#fff"></span>White</td><td class="mono">#000000</td><td class="mono">21.00</td><td class="pass">AAA</td></tr>
+        <tr><td><span class="dot" style="background:#9AA4B2"></span>Secondary</td><td class="mono">#000000</td><td class="mono">8.33</td><td class="pass">AAA</td></tr>
+        <tr><td><span class="dot" style="background:#768291"></span>Muted</td><td class="mono">#000000</td><td class="mono">5.37</td><td class="pass">AA</td></tr>
+        <tr><td><span class="dot" style="background:#00B8FF"></span>X1 Cyan</td><td class="mono">#000000</td><td class="mono">9.30</td><td class="pass">AAA</td></tr>
+        <tr><td><span class="dot" style="background:#00FF9C"></span>Buy green</td><td class="mono">#000000</td><td class="mono">15.78</td><td class="pass">AAA</td></tr>
+        <tr><td><span class="dot" style="background:#FF3355"></span>Sell red</td><td class="mono">#000000</td><td class="mono">5.86</td><td class="pass">AA</td></tr>
+        <tr><td><span class="dot" style="background:#000"></span>Black label</td><td class="mono">#00B8FF</td><td class="mono">9.30</td><td class="pass">AAA</td></tr>
+        <tr><td><span class="dot" style="background:#fff"></span>White label</td><td class="mono">#00B8FF</td><td class="mono">2.26</td><td class="fail">Fail</td></tr>
+        <tr><td><span class="dot" style="background:#003A93"></span>Navy</td><td class="mono">#000000</td><td class="mono">2.03</td><td class="fail">Fail as text</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="rules">Rules</h2>
+    <div class="split">
+      <div class="do">
+        <h3>Do</h3>
+        <ul>
+          <li>Keep chrome ≥90% void and steel. Cyan is a reticle, not a fill.</li>
+          <li>Use cyan for selected, focus, links, and the one primary action.</li>
+          <li>Set black type on solid cyan buttons.</li>
+          <li>Reserve green / red for price direction.</li>
+          <li>Stay dark. Match <code>theme-color: #0A0A0F</code>.</li>
+        </ul>
+      </div>
+      <div class="dont">
+        <h3>Don’t</h3>
+        <ul>
+          <li>Drop in Tailwind sky/blue defaults in place of <code>#00B8FF</code>.</li>
+          <li>Put white type on cyan fills.</li>
+          <li>Use logo navy for links or small labels.</li>
+          <li>Warm the grays or add a light theme.</li>
+          <li>Promote <code>#39FF14</code> — it is a leftover, not a token.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 id="tokens">Tokens</h2>
+    <pre>:root {
+  --bg-primary:    #000000;
+  --bg-secondary:  #0B0F14;
+  --bg-tertiary:   #121821;
+  --bg-hover:      #1A2332;
+  --border-subtle: #1C2430;
+  --border-bright: #263244;
+  --text-primary:  #FFFFFF;
+  --text-secondary:#9AA4B2;
+  --text-muted:    #768291;
+  --x1-blue:       #00B8FF;
+  --buy-green:     #00FF9C;
+  --sell-red:      #FF3355;
+  --warn-yellow:   #FFD166;
+}</pre>
+    <p>Machine files: <a href="tokens.css">tokens.css</a> · <a href="tokens.json">tokens.json</a> · <a href="BRAND.md">BRAND.md</a></p>
+
+    <footer>
+      Extracted from x1.ninja production CSS and logo raster. Site fonts: Inter, JetBrains Mono.
+      Color scheme is dark-only.
+    </footer>
+  </div>
+</body>
+</html>
